@@ -1,9 +1,11 @@
 import { Component } from 'react/cjs/react.production.min';
+import PropTypes from 'prop-types';
 
 import MarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMassege from '../errorMassege/ErrorMassege';
 import Skeleton from '../skeleton/Skeleton'
+
 
 
 
@@ -131,6 +133,10 @@ const View = ({char}) => {
                 </ul>
         </>
     )
+}
+
+CharInfo.propTypes = {
+    charId: PropTypes.number
 }
 
 export default CharInfo;

@@ -1,4 +1,5 @@
 import { Component } from "react/cjs/react.production.min";
+import PropTypes from 'prop-types';
 
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
@@ -6,6 +7,7 @@ import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 
 import decoration from '../../resources/img/vision.png';
+import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 
 class App extends Component{
     state = {
@@ -23,16 +25,29 @@ class App extends Component{
             <div className="app">
                 <AppHeader/>
                 <main>
-                    <RandomChar/>
+                    <ErrorBoundary>
+                        <RandomChar/>
+                    </ErrorBoundary>
+                    
                     <div className="char__content">
-                        <CharList onSelectedChar={this.onSelectedChar}/>
-                        <CharInfo charId={this.state.selectedChar}/>
+                        <ErrorBoundary>
+                            <CharList onSelectedChar={this.onSelectedChar}/>
+                        </ErrorBoundary>
+                        <ErrorBoundary>
+                            <CharInfo charId={this.state.selectedChar}/>
+                        </ErrorBoundary>
+                        
+                        
                     </div>
                     <img className="bg-decoration" src={decoration} alt="vision"/>
                 </main>
             </div>
         )
     }
+}
+
+CharList.propTypes = {
+    onSelectedChar: PropTypes.func.isRequired
 }
 
 export default App;
